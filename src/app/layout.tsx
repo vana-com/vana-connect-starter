@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Vana Connect — Next.js Starter",
   description: "Example app for the Vana Connect SDK",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({

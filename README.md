@@ -11,10 +11,26 @@ Minimal Next.js app demonstrating the Vana Connect flow. Shows the server-side S
 
 ```bash
 cp .env.local.example .env.local
-# Edit .env.local with your private key and scopes
+# Edit .env.local with your private key and APP_URL
 pnpm install
 pnpm dev   # Opens on http://localhost:3001
 ```
+
+## Environment Variables
+
+| Variable           | Required | Description                                                        |
+| ------------------ | -------- | ------------------------------------------------------------------ |
+| `VANA_PRIVATE_KEY` | Yes      | Builder private key registered on-chain                            |
+| `SCOPES`           | No       | Comma-separated scopes (default: `test.dpv1.260130`)               |
+| `APP_URL`          | No       | Public URL of your deployed app (default: `http://localhost:3001`) |
+
+## Web App Manifest
+
+The app serves a W3C Web App Manifest at `/manifest.json` containing a signed `vana` block. The Desktop App uses this to verify the builder's identity. The manifest is generated dynamically using `signVanaManifest()` from the SDK, which signs the vana block fields with EIP-191 using your `VANA_PRIVATE_KEY`.
+
+## Webhook
+
+`POST /api/webhook` is a stub endpoint for receiving grant notifications from the Desktop App. Extend it with signature verification and grant processing for production use.
 
 ## E2E Testing Workflow
 

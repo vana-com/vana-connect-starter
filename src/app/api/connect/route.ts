@@ -1,4 +1,4 @@
-// Creates a session to connect data from dataConnect into your app.
+// Creates a session to connect data from DataConnect into your app.
 // Returns a connect URL for the user to approve the connection.
 
 import { NextResponse } from "next/server";

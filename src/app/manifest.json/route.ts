@@ -1,5 +1,5 @@
 // Serves a signed web app manifest.
-// The dataConnect Desktop App reads this to verify your app's identity.
+// The DataConnect Desktop App reads this to verify your app's identity.
 
 import { NextResponse } from "next/server";
 import { signVanaManifest } from "@opendatalabs/connect/server";

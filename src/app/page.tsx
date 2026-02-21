@@ -7,7 +7,7 @@ export default function Home() {
         Vana Connect — Next.js Starter
       </h1>
       <p style={{ fontSize: 14, color: "#71717a", marginBottom: 40 }}>
-        This app demonstrates how to get data from dataConnect into a Next.js
+        This app demonstrates how to get data from DataConnect into a Next.js
         app.
       </p>
       <ConnectFlow />

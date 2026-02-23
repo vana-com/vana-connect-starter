@@ -26,7 +26,7 @@ export async function GET() {
       theme_color: "#09090b",
       icons: [
         {
-          src: "/icon.png",
+          src: "/icon",
           sizes: "192x192",
           type: "image/png",
         },

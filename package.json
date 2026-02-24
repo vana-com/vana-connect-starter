@@ -7,7 +7,7 @@
     "build": "pnpm --filter @opendatalabs/connect build && next build"
   },
   "dependencies": {
-    "@opendatalabs/connect": "workspace:*",
+    "@opendatalabs/connect": "^0.8.1",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

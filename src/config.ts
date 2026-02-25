@@ -8,5 +8,5 @@ export const config = createVanaConfig({
     process.env.VANA_APP_PRIVATE_KEY) as `0x${string}`,
   scopes: SCOPES,
   appUrl: process.env.APP_URL ?? "",
-  environment: "dev",
+  environment: "prod",
 });

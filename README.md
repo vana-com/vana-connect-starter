@@ -6,7 +6,9 @@ Minimal Next.js app demonstrating the Vana Connect flow to port personal data in
 
 Paste this prompt into an AI to have it make you an app
 ```
-This Vana connect starter connects to users' personal data via the Vana Connect SDK. Help me customize it into [describe your app and data source — e.g. "a Rick Rubin style ChatGPT conversation analyzer that pulls out poetic learnings"].
+This Vana connect starter connects to users' personal data via the Vana Connect 
+SDK. Help me customize it into [describe your app and data source — e.g. "a 
+Rick Rubin style ChatGPT conversation analyzer that pulls out poetic learnings"].
 
   What to change:
   1. SCOPES in src/config.ts — pick the right data types for my use case

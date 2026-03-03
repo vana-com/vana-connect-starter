@@ -75,7 +75,7 @@ pnpm dev   # Opens on http://localhost:3001
 
 Use scope keys from the connector schema list: [https://github.com/vana-com/data-connectors/tree/main/schemas](https://github.com/vana-com/data-connectors/tree/main/schemas)
 
-- Each value must be a valid scope key (for example `chatgpt.conversations`, `instagram.posts`, `spotify.streaming_history`).
+- Each value must be a valid scope key (for example `chatgpt.conversations`, `instagram.posts`, `spotify.history`).
 - Multiple scopes are comma-separated.
 - Your app only receives data for scopes the user approves in DataConnect.
 

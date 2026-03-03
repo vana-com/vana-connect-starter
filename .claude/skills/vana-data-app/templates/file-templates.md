@@ -375,7 +375,7 @@ Common scope identifiers (check https://github.com/vana-com/data-connectors/tree
 - `chatgpt.conversations` — ChatGPT conversation history
 - `instagram.posts` — Instagram posts and media
 - `instagram.profile` — Instagram profile data
-- `spotify.history` — Spotify listening history
+- `spotify.savedTracks` — Spotify saved tracks
 - `gmail.messages` — Gmail messages
 - `twitter.posts` — Twitter/X posts
 - `linkedin.profile` — LinkedIn profile data

@@ -58,6 +58,7 @@ Ask the user (if not clear):
 3. What scopes are needed? (e.g. `chatgpt.conversations`, `instagram.posts`)
 
 Available scope schemas: https://github.com/vana-com/data-connectors/tree/main/schemas
+Scope key rule: use the schema filename without `.json` (for example `spotify.savedTracks.json` -> `spotify.savedTracks`).
 
 ### Step 2 — Scaffold or clone the starter
 

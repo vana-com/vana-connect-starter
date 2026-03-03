@@ -7,15 +7,41 @@ Complete reference templates for all customizable files in a Vana data app.
 ```typescript
 import { createVanaConfig } from "@opendatalabs/connect/server";
 
-// Scopes define what user data your app requests.
-// Browse available scopes: https://github.com/vana-com/data-connectors/tree/main/schemas
-const SCOPES = ["chatgpt.conversations"];
+const scopes = (process.env.VANA_SCOPES ?? "")
+  .split(",")
+  .map((scope) => scope.trim())
+  .filter(Boolean);
+const appUrl = (process.env.APP_URL ?? "").trim().replace(/\/+$/, "");
+const privateKey = (process.env.VANA_PRIVATE_KEY ?? "").trim();
+
+if (scopes.length === 0) {
+  throw new Error(
+    "Missing VANA_SCOPES. Set VANA_SCOPES in .env.local (comma-separated), e.g. VANA_SCOPES=chatgpt.conversations",
+  );
+}
+
+if (!appUrl) {
+  throw new Error(
+    "Missing APP_URL. Set APP_URL in .env.local, e.g. APP_URL=http://localhost:3001",
+  );
+}
+
+if (!privateKey) {
+  throw new Error(
+    "Missing VANA_PRIVATE_KEY. Set VANA_PRIVATE_KEY in .env.local.",
+  );
+}
+
+if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
+  throw new Error(
+    "Invalid VANA_PRIVATE_KEY. Expected 0x followed by 64 hex characters.",
+  );
+}
 
 export const config = createVanaConfig({
-  privateKey: (process.env.VANA_PRIVATE_KEY ??
-    process.env.VANA_APP_PRIVATE_KEY) as `0x${string}`,
-  scopes: SCOPES,
-  appUrl: process.env.APP_URL ?? "",
+  privateKey: privateKey as `0x${string}`,
+  scopes,
+  appUrl,
 });
 ```
 
@@ -261,10 +287,13 @@ export default function RootLayout({
 ## .env.local
 
 ```
-# Builder key registered at https://account.vana.org/admin
+# App private key (get it from Vana Gateway: https://account.vana.org/admin)
 VANA_PRIVATE_KEY=0x...
-# Public URL of your deployed app
+# Public URL of your app (no trailing slash)
 APP_URL=http://localhost:3001
+# Required: comma-separated scopes
+# Scope list/schemas: https://github.com/vana-com/data-connectors/tree/main/schemas
+VANA_SCOPES=chatgpt.conversations
 ```
 
 ## package.json

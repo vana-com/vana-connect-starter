@@ -32,7 +32,7 @@ the user's Personal Server using the grant.
 
 | File | What to change |
 |------|---------------|
-| `src/config.ts` | `SCOPES` array — pick data types for your use case |
+| `.env.local` | Set `VANA_SCOPES` (comma-separated scope keys) |
 | `src/app/manifest.json/route.ts` | App name, short_name, privacy/terms/support URLs |
 | `src/components/ConnectFlow.tsx` | UI — redesign data display, add visualizations, features |
 | `src/app/page.tsx` | Homepage — title, description, branding, layout |
@@ -70,27 +70,50 @@ cp .env.local.example .env.local
 ```
 
 Required environment variables:
-- `VANA_PRIVATE_KEY` — Builder private key (register at https://account.vana.org/admin)
-- `APP_URL` — `http://localhost:3001` for dev, HTTPS domain for production
+- `VANA_PRIVATE_KEY` — App private key (get it from https://account.vana.org/admin)
+- `APP_URL` — `http://localhost:3001` for dev, HTTPS domain for production (no trailing slash)
+- `VANA_SCOPES` — Comma-separated scope keys, e.g. `chatgpt.conversations,instagram.posts`
 
 ### Step 3 — Configure scopes
 
-Edit `src/config.ts`:
+Set scopes in `.env.local`:
+
+```bash
+VANA_SCOPES=chatgpt.conversations
+# or
+VANA_SCOPES=chatgpt.conversations,instagram.posts
+```
+
+`src/config.ts` reads `VANA_SCOPES` and validates required env vars (`VANA_PRIVATE_KEY`, `APP_URL`, `VANA_SCOPES`) at startup:
 
 ```typescript
 import { createVanaConfig } from "@opendatalabs/connect/server";
 
-const SCOPES = ["chatgpt.conversations"]; // Change to your data types
+const scopes = (process.env.VANA_SCOPES ?? "")
+  .split(",")
+  .map((scope) => scope.trim())
+  .filter(Boolean);
+const appUrl = (process.env.APP_URL ?? "").trim().replace(/\/+$/, "");
+const privateKey = (process.env.VANA_PRIVATE_KEY ?? "").trim();
+
+if (scopes.length === 0) {
+  throw new Error("Missing VANA_SCOPES");
+}
+
+if (!appUrl) {
+  throw new Error("Missing APP_URL");
+}
+
+if (!privateKey || !/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
+  throw new Error("Invalid VANA_PRIVATE_KEY");
+}
 
 export const config = createVanaConfig({
-  privateKey: (process.env.VANA_PRIVATE_KEY ??
-    process.env.VANA_APP_PRIVATE_KEY) as `0x${string}`,
-  scopes: SCOPES,
-  appUrl: process.env.APP_URL ?? "",
+  privateKey: privateKey as `0x${string}`,
+  scopes,
+  appUrl,
 });
 ```
-
-Multiple scopes are supported: `["chatgpt.conversations", "instagram.posts"]`
 
 ### Step 4 — Update app identity
 

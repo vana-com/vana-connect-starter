@@ -376,8 +376,7 @@ Common scope identifiers (check https://github.com/vana-com/data-connectors/tree
 - `instagram.posts` — Instagram posts and media
 - `instagram.profile` — Instagram profile data
 - `spotify.savedTracks` — Spotify saved tracks
-- `gmail.messages` — Gmail messages
-- `twitter.posts` — Twitter/X posts
 - `linkedin.profile` — LinkedIn profile data
+- `github.profile` — GitHub profile data
 
 Scopes follow the pattern: `{source}.{data_type}` where the first segment is the platform name.

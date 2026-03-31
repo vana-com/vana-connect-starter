@@ -11,7 +11,7 @@ description: >
 # Vana Data App Builder
 
 Build Next.js applications that access users' portable personal data (ChatGPT conversations,
-Instagram posts, Spotify history, etc.) via the Vana Connect protocol. Apps use the
+Instagram posts, Spotify saved tracks, etc.) via the Vana Connect protocol. Apps use the
 `@opendatalabs/connect` SDK for session creation, grant polling, and data retrieval.
 
 ## Core Architecture
@@ -54,7 +54,7 @@ the user's Personal Server using the grant.
 
 Ask the user (if not clear):
 1. What does the app do with the data? (analyze, visualize, export, transform)
-2. Which data sources? (chatgpt, instagram, spotify, gmail, etc.)
+2. Which data sources? (chatgpt, instagram, spotify, linkedin, etc.)
 3. What scopes are needed? (e.g. `chatgpt.conversations`, `instagram.posts`)
 
 Available scope schemas: https://github.com/vana-com/data-connectors/tree/main/schemas
